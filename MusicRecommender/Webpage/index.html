@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Login</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <style>
+        body {
+            padding: 5%;
+        }
+        #userIDLogin {
+            width: 300px;
+        }
+        .col-md-6{
+            text-align: center;
+        }
+        #signUpUserModal {
+            margin: 20px;
+        }
+        </style>
+    </head>
+    <body>
+        {{temp}}
+        <div class="container">
+            <div class="col-md-6 col-md-offset-3">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h2>Login</h2>
+                    </div>
+                    <div class="panel-body">
+                        <br/>
+                        {% if values %}
+                            <div class="{{values['class_label']}}">
+                                {{values['status']}}
+                            </div>
+                        {% endif %}
+                        <form action="/home" method="post">
+                            <input id="userIDLogin" type="text" name="user_id" placeholder="User ID"/>
+                            <br/>
+                            <br/>
+                            <input class="btn btn-primary" type="submit" value="Sign in" />
+                            <br/>
+                            <br/>
+
+
+                            <button type="button" class="btn btn-link" data-toggle="modal" data-target="#signUpModal">New User? Create New Account</button>
+                        </form>
+                    </div>
+                </div>
+
+
+                <div id="signUpModal" class="modal fade" role="dialog">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Register User</h4>
+                            </div>
+                            <form action="/signUp" method="post">
+                                User ID: <input id="signUpUserModal" type="text" name="user_id" placeholder="User ID">
+                            <div class="modal-footer">
+                                <input class="btn btn-primary" type="submit" value="Sign Up">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </body>
+</html>
