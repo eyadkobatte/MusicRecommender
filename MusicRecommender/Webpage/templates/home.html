@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Home</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <style>
+        #userIdHeader {
+            float:left;
+        }
+        #logoutButton {
+            float: right;
+        }
+        #status {
+            clear: both;
+        }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="col-md-12" id="userIdDiv">
+                <h2 id="userIdHeader">User Id: {{ values['user_id'] }}</h2>
+                <h4 id="logoutButton"><a href="/logout">Logout</a></h4>
+                <br>
+                <br>
+                <br>
+                <h4 id="status">{{ values['status'] }}</h4>
+            </div>
+            <div class="col-md-6" id="songHistoryDiv">
+                <h3>Song History</h3>
+                <table class="table table-hover">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">No</th>
+                            <th scope="col">Song</th>
+                            <th scope="col">Artist</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for song in values['history'] %}
+                        <tr>
+                            <th scope="row">{{ loop.index }}</th>
+                            <!-- Song Name -->
+                            <td>{{ song[3].split(' - ')[0] }} <!--<a href="/similar/{{song}}">[Similar Songs]</a>--> </td>
+                            <!-- Artist Name -->
+                            <td>{{ song[3].split(' - ')[1] }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                    <!-- <tfoot>
+                        <tr>
+                            <form action="/addNewSong" method="post">
+                                <input type="hidden" name="user_id" value="{{user_id}}">
+                                <td colspan="3">
+                                    <input class="btn btn-info btn-sm" type="submit" value="Add New Song?">
+                                </td>
+                            </form>
+                        </tr>
+                    </tfoot> -->
+                </table>
+            </div>
+            <div class="col-md-6" id="recommendationDiv">
+                <h3>New Recommendations</h3>
+                <table class="table table-hover">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">No</th>
+                            <th scope="col">Song</th>
+                            <th scope="col">Artist</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for song in values['recommendations'].song %}
+                            <tr>
+                                <th scope="row">{{ loop.index }}</th>
+                                <!-- Song Name -->
+                                <td>{{ song.split(' - ')[0] }} <a href="https://www.youtube.com/results?search_query={{song}}" target="_blank">[Link]</a></td>
+                                <!-- Artist Name -->
+                                <td>{{ song.split(' - ')[1] }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </body>
+</html>
